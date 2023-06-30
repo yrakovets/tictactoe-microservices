@@ -9,7 +9,10 @@ public class AI {
     public int getStep(List<Character> field, boolean isCross) {
         List<Line> lines = new LinesConstructor(field, isCross).getLines();
 
-        Optional<Integer> winning = lines.stream().filter(Line::isWinning).map(Line::getEmpty).findFirst();
+        Optional<Integer> winning = lines
+                .stream()
+                .filter(Line::isWinning)
+                .map(Line::getEmpty).findFirst();
 
         if (winning.isPresent()) {
             return winning.get();

@@ -5,26 +5,22 @@
 	<parent>
 		<groupId>org.springframework.boot</groupId>
 		<artifactId>spring-boot-starter-parent</artifactId>
-		<version>3.1.1</version>
+		<version>3.1.0</version>
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>com.yrakovets.tic-tac-toe</groupId>
-	<artifactId>tic-tac-toeAI</artifactId>
+	<artifactId>naming-server</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>tic-tac-toeAI</name>
-	<description>AI for toc-tac-toe</description>
+	<name>naming-server</name>
+	<description>Tic-tac-toe naming server</description>
 	<properties>
 		<java.version>17</java.version>
 		<spring-cloud.version>2022.0.3</spring-cloud.version>
 	</properties>
 	<dependencies>
 		<dependency>
-			<groupId>org.springframework.boot</groupId>
-			<artifactId>spring-boot-starter-web</artifactId>
-		</dependency>
-		<dependency>
 			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-netflix-eureka-client</artifactId>
+			<artifactId>spring-cloud-starter-netflix-eureka-server</artifactId>
 		</dependency>
 
 		<dependency>
