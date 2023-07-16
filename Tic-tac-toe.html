@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<!-- saved from url=(0022)chrome://new-tab-page/ -->
+<html dir="ltr" lang="en" class="" lazy-loaded="true">
+<head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <title>Tic-Tac-Toe</title>
+    <style>
+      body {
+        background: #FFFFFF;
+        margin: 0;
+      }
+	  td {
+		width: 200px;
+		height: 200px;
+		border-color: #FFFFFF;
+		border: 1px solid;
+		text-align: center;
+	  }
+	  #message {
+		foreground-color=red;
+	  }
+
+    </style>
+</head>
+<body>
+	<h1>Tic-tac-toe Game</h1>
+	<h2 id="message"></h2>
+	<table>
+		<tr>
+			<td index=0></td>
+			<td index=1></td>
+			<td index=2></td>
+		</tr>
+		<tr>
+			<td index=3></td>
+			<td index=4></td>
+			<td index=5></td>
+		</tr>
+		<tr>
+			<td index=6></td>
+			<td index=7></td>
+			<td index=8></td>
+		</tr>
+	</table>
+	
+	<button type="button" id="newGame" onclick="newGame()">New Game</button>
+	
+    
+	<script>
+		
+		function writeGameParameters(responseJson) {
+			window.game = [];
+			window.game.crosses = responseJson.crosses;
+			window.game.zeros = responseJson.zeros;
+			window.game.finished =  responseJson.finished;
+			window.game.winner = responseJson.winner;
+		}
+		
+		function applyResult(responseJson) {
+			writeGameParameters(responseJson);
+			updateField(responseJson);
+		} 
+		
+		function getWinnerName(char) {
+			if (char == 'X') {
+				return "Crosses";
+			}
+			return "Zeros";
+		}
+		
+		function updateField(responseJson) {
+			crosses = responseJson.crosses;
+			for (let i = 0; i < crosses.length; i++) {
+				document.querySelector('td[index="' + crosses.at(i) + '"]').textContent="X";
+			}
+			zeros = responseJson.zeros;
+			for (let i = 0; i < zeros.length; i++) {
+				document.querySelector('td[index="' + zeros.at(i) + '"]').textContent="O";
+			}
+			if (responseJson.finished == true) {
+				if (responseJson.winner == null) {
+					getGameMessageElement().textContent = "Draw! Click New Game";
+				} else {
+					getGameMessageElement().textContent = "" + getWinnerName(responseJson.winner) + " wins! Click New Game";
+				}
+			}
+		}
+		
+		function newGame() {
+			document.querySelectorAll('td').forEach((element) => element.textContent = "");
+			getGameMessageElement().textContent = "";
+			loadPost("newGame");
+		}
+		
+		function loadPost(path) {
+			fetch("http://localhost:8300/" + path, {
+				method: "POST",
+				body: "",
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
+			})
+			.then((response) => response.json())
+			.then((responseJson) => applyResult(responseJson));
+		}
+		
+		function loadGet(path) {
+			fetch("http://localhost:8300/" + path, {
+				method: "GET",
+				headers: {
+					"Content-type": "application/json; charset=UTF-8"
+				}
+			})
+			.then((response) => response.json())
+			.then((responseJson) => applyResult(responseJson));
+		}
+		
+		function makeStep(element) {
+			if (window.game.finished == false && element.textContent == "") {
+				element.textContent = "X";
+				index = element.getAttribute("index");
+				loadPost("makeStep/" + index);
+			}
+		}
+		
+		function addFieldListener(element) {
+			element.addEventListener('click', () => makeStep(element));
+		}
+		
+		function getGameMessageElement() {
+			return document.querySelector("#message");
+		}
+		
+		document.querySelectorAll('td').forEach((element) => addFieldListener(element));
+		loadGet("getDesk");
+		
+	</script>
+</body></html>

@@ -16,7 +16,7 @@ class LinesConstructorTest {
 
     @Test
     public void testLines() {
-        List<Character> field = new FieldFactory().build();
+        List<Character> field = new FieldBuilder().build();
 
         field.set(0, cross);
         field.set(4, cross);

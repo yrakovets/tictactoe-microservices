@@ -12,9 +12,13 @@ public class Game {
     private Long id;
 
     private boolean isFinished;
+    private Character winner = null;
     private boolean playedCrosses;
     private String crosses = Strings.EMPTY;
     private String zeros = Strings.EMPTY;
+
+    final static Character cross = 'X';
+    final static Character zero = 'O';
 
     public Game() {
 
@@ -62,5 +66,13 @@ public class Game {
 
     public void setPlayedCrosses(boolean playedCrosses) {
         this.playedCrosses = playedCrosses;
+    }
+
+    public Character getWinner() {
+        return winner;
+    }
+
+    public void setWinner(Character winner) {
+        this.winner = winner;
     }
 }

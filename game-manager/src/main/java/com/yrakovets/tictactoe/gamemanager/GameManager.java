@@ -11,6 +11,9 @@ public class GameManager {
     private GameRepository gameRepository;
 
     @Autowired
+    private GameEstimation gameEstimation;
+
+    @Autowired
     private AiProxy proxy;
 
     Game createNewGame(boolean playedCrosses) {
@@ -61,7 +64,11 @@ public class GameManager {
         } else {
             game.setZeros(game.getZeros() + step);
         }
-        makeAiStep(game);
+        gameEstimation.estimate(game);
+        if (!game.isFinished()) {
+            makeAiStep(game);
+            gameEstimation.estimate(game);
+        }
         gameRepository.save(game);
         return game;
     }

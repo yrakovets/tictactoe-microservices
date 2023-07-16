@@ -10,7 +10,7 @@ import static org.junit.jupiter.api.Assertions.*;
 class AITest {
     @Test
     void getStepWithWinning() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCrosses(Arrays.asList(0,4))
                 .setZeros(Arrays.asList(2))
                 .build();
@@ -20,7 +20,7 @@ class AITest {
 
     @Test
     void getStepWithWinning2() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCrosses(Arrays.asList(4))
                 .setZeros(Arrays.asList(2,0))
                 .build();
@@ -30,7 +30,7 @@ class AITest {
 
     @Test
     void getStepWithWinning3() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCrosses(Arrays.asList(4,6,8))
                 .setZeros(Arrays.asList(3,2,0))
                 .build();
@@ -40,7 +40,7 @@ class AITest {
 
     @Test
     void getSavingStep() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCrosses(Arrays.asList(4,6))
                 .setZero(0)
                 .build();
@@ -50,7 +50,7 @@ class AITest {
 
     @Test
     void getPriorityStep() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCross(2)
                 .build();
 
@@ -60,7 +60,7 @@ class AITest {
 
     @Test
     void getPriorityStep2() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCross(4)
                 .build();
 
@@ -69,7 +69,7 @@ class AITest {
 
     @Test
     void getPriorityStep3() {
-        List<Character> field = new FieldFactory()
+        List<Character> field = new FieldBuilder()
                 .setCrosses(Arrays.asList(4,1,8))
                 .setZeros(Arrays.asList(0,7))
                 .build();

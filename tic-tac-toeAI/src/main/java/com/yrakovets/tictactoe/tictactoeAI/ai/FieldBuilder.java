@@ -3,10 +3,10 @@ package com.yrakovets.tictactoe.tictactoeAI.ai;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FieldFactory {
+public class FieldBuilder {
     List<Character> field;
 
-    public FieldFactory() {
+    public FieldBuilder() {
         field = new ArrayList<>();
         for(int i = 0; i < 9; i++) {
             field.add(i, null);
@@ -15,40 +15,40 @@ public class FieldFactory {
 
 
     //TODO:  refactor with DRY principle
-    public FieldFactory setCrosses(List<Integer> indexes) {
+    public FieldBuilder setCrosses(List<Integer> indexes) {
         for (Integer index : indexes) {
             field.set(index, AI.cross);
         }
         return this;
     }
 
-    public FieldFactory setCrosses(String indexString) {
+    public FieldBuilder setCrosses(String indexString) {
         for (char indexChar : indexString.toCharArray()) {
             field.set(Integer.parseInt(String.valueOf(indexChar)), AI.cross);
         }
         return this;
     }
 
-    public FieldFactory setCross(Integer index) {
+    public FieldBuilder setCross(Integer index) {
         field.set(index, AI.cross);
         return this;
     }
 
-    public FieldFactory setZeros(List<Integer> indexes) {
+    public FieldBuilder setZeros(List<Integer> indexes) {
         for (Integer index : indexes) {
             field.set(index, AI.zero);
         }
         return this;
     }
 
-    public FieldFactory setZeros(String indexString) {
+    public FieldBuilder setZeros(String indexString) {
         for (char indexChar : indexString.toCharArray()) {
             field.set(Integer.parseInt(String.valueOf(indexChar)), AI.zero);
         }
         return this;
     }
 
-    public FieldFactory setZero(Integer index) {
+    public FieldBuilder setZero(Integer index) {
         field.set(index, AI.zero);
         return this;
     }
