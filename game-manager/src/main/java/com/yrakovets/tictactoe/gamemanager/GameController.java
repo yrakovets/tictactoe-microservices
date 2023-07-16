@@ -11,7 +11,12 @@ public class GameController {
 
     @GetMapping(path = "/getDesk")
     public Game getCurrentGame() {
-        return gameManager.getActiveGame();
+        Game currentGame = gameManager.getActiveGame();
+        if (currentGame != null) {
+            return gameManager.getActiveGame();
+        } else {
+            return gameManager.createNewGame(true);
+        }
     }
 
     @PostMapping(path = "/newGame")
