@@ -19,7 +19,7 @@ public class GameController {
         }
     }
 
-    @PostMapping(path = "/newGame")
+        @PostMapping(path = "/newGame")
     public Game setNewGame() {
         gameManager.closeActiveGame();
         return gameManager.createNewGame(true);

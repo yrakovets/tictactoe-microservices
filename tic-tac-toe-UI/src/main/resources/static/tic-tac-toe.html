@@ -93,7 +93,7 @@
 		}
 		
 		function loadPost(path) {
-			fetch("http://localhost:8300/" + path, {
+			fetch("/" + path, {
 				method: "POST",
 				body: "",
 				headers: {
@@ -105,7 +105,7 @@
 		}
 		
 		function loadGet(path) {
-			fetch("http://localhost:8300/" + path, {
+			fetch("/" + path, {
 				method: "GET",
 				headers: {
 					"Content-type": "application/json; charset=UTF-8"
