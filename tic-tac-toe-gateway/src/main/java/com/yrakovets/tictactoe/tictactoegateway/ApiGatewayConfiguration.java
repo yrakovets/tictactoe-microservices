@@ -11,10 +11,10 @@ public class ApiGatewayConfiguration {
     public RouteLocator gatewayRouter(RouteLocatorBuilder builder) {
         return builder.routes()
                 .route(p -> p.path("").uri("lb://tic-tac-toe-ui"))
-                .route(p -> p.path("/getDesk").uri("lb://tic-tac-toe-game-manager/getDesk"))
-                .route(p -> p.path("/newGame").uri("lb://tic-tac-toe-game-manager/newGame"))
-                .route(p -> p.path("/newGame/**").uri("lb://tic-tac-toe-game-manager/newGame"))
-                .route(p -> p.path("/makeStep/**").uri("lb://tic-tac-toe-game-manager/makeStep"))
+                .route(p -> p.path("/getDesk").uri("lb://game-manager/getDesk"))
+                .route(p -> p.path("/newGame").uri("lb://game-manager/newGame"))
+                .route(p -> p.path("/newGame/**").uri("lb://game-manager/newGame"))
+                .route(p -> p.path("/makeStep/**").uri("lb://game-manager/makeStep/"))
                 .build();
     }
 }

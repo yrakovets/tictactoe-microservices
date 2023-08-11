@@ -10,7 +10,7 @@
 	</parent>
 	<groupId>com.yrakovets.tic-tac-toe</groupId>
 	<artifactId>game-manager</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.1</version>
 	<name>game-manager</name>
 	<description>Tic-tac-toe game manager</description>
 	<properties>
@@ -67,6 +67,12 @@
 			<plugin>
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
+				<configuration>
+					<image>
+						<name>yrakovets/ttt-${project.artifactId}:${project.version}</name>
+					</image>
+					<pullPolicy>IF_NOT_PRESENT</pullPolicy>
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>

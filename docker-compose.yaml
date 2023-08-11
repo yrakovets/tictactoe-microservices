@@ -1,0 +1,61 @@
+version: '3.7'
+
+services:
+  naming-server:
+    image: yrakovets/ttt-naming-server:0.0.1
+    mem_limit: 700m
+    ports: 
+      - "8761:8761"
+    networks:
+      - ttt
+
+  tic-tac-toe-ai:
+    image: yrakovets/ttt-tic-tac-toe-ai:0.0.1
+    mem_limit: 700m
+    ports: 
+      - "8200:8200"
+    networks: 
+      - ttt
+    depends_on: 
+      - naming-server
+    environment: 
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka 
+
+  tic-tac-toe-ui: 
+    image: yrakovets/ttt-tic-tac-toe-ui:0.0.1
+    mem_limit: 700m
+    ports: 
+      - "8400:8400"
+    networks: 
+      - ttt
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  game-manager:
+    image: yrakovets/ttt-game-manager:0.0.1
+    mem_limit: 700m
+    ports: 
+      - "8300:8300"
+    networks:
+      - ttt
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+
+  api-gateway:
+    image: yrakovets/ttt-tic-tac-toe-gateway:0.0.1
+    mem_limit: 700m
+    ports: 
+      - "8100:8100"
+    networks:
+      - ttt
+    depends_on:
+      - naming-server
+    environment:
+      EUREKA.CLIENT.SERVICEURL.DEFAULTZONE: http://naming-server:8761/eureka
+
+networks:
+  ttt:
